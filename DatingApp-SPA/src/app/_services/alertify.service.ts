@@ -8,6 +8,7 @@ export class AlertifyService {
 
 constructor() { }
 
+// tslint:disable-next-line: typedef
 confirm(message: string, okCallback: () => any){
   alertify.confirm(message, function(e){
     if (e){
