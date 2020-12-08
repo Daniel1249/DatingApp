@@ -11,11 +11,14 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from './_services/user.service';
+import { MemberCardComponent } from './members/member-card/member-card.component';
 
 
 
@@ -27,10 +30,12 @@ import { AuthGuard } from './_guards/auth.guard';
       RegisterComponent,
       MemberListComponent,
       ListsComponent,
-      MessagesComponent
+      MessagesComponent,
+      MemberCardComponent
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot( ),
@@ -40,7 +45,8 @@ import { AuthGuard } from './_guards/auth.guard';
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      UserService
    ],
    bootstrap: [
       AppComponent
