@@ -11,6 +11,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -20,7 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 
-
+export function tokenGetter() {
+   return localStorage.getItem('token');
+ }
 
 @NgModule({
    declarations: [			
@@ -39,7 +42,14 @@ import { MemberCardComponent } from './members/member-card/member-card.component
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot( ),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+           tokenGetter,
+           allowedDomains: ['localhost:5001'],
+           disallowedRoutes: ['localhost:5001/api/auth']
+         }
+       })
    ],
    providers: [
       AuthService,

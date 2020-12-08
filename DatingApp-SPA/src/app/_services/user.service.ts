@@ -3,28 +3,29 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
-//import { url } from 'inspector';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    Authorization: 'Bearer ' + localStorage.getItem('token')
-  })
-};
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     Authorization: 'Bearer ' + localStorage.getItem('token')
+//   })
+// };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  // baseUrl = 'https://localhost:5001/api/';
   baseUrl = environment.apiUrl;
-  //baseUrl = 'https://localhost:5001/api/';
 
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'users', httpOptions);
+    // return this.http.get<User[]>(this.baseUrl + 'users', httpOptions);
+    return this.http.get<User[]>(this.baseUrl + 'users');
   }
 
   getUser(id): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
+    // return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
+    return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 }
