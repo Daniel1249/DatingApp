@@ -9,7 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDropdownModule, } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+//import { GalleryModule } from 'ngx-gallery';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -20,13 +23,17 @@ import { AuthGuard } from './_guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+
 
 export function tokenGetter() {
    return localStorage.getItem('token');
  }
 
 @NgModule({
-   declarations: [			
+   declarations: [
       AppComponent,
       NavComponent,
       HomeComponent,
@@ -34,7 +41,8 @@ export function tokenGetter() {
       MemberListComponent,
       ListsComponent,
       MessagesComponent,
-      MemberCardComponent
+      MemberCardComponent,
+      MemberDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -42,6 +50,9 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot( ),
+      TabsModule.forRoot(),
+      NgxGalleryModule,
+      //GalleryModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
@@ -56,7 +67,9 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
+      MemberDetailResolver,
+      MemberListResolver
    ],
    bootstrap: [
       AppComponent
