@@ -11,8 +11,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { BsDropdownModule, } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-//import { GalleryModule } from 'ngx-gallery';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxGalleryModule } from 'ngx-gallery';
+//import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -52,13 +52,13 @@ export function tokenGetter() {
       BsDropdownModule.forRoot( ),
       TabsModule.forRoot(),
       NgxGalleryModule,
-      //GalleryModule,
+      // GalleryModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
-           tokenGetter,
-           allowedDomains: ['localhost:5001'],
-           disallowedRoutes: ['localhost:5001/api/auth']
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5001'],
+            blacklistedRoutes: ['localhost:5001/api/auth']
          }
        })
    ],
